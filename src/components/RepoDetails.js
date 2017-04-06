@@ -1,21 +1,20 @@
-import React, { Component, PureComponent } from 'react';
+import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import './RepoDetails.css';
 import $ from 'jquery';
 
-class RepoDetails extends PureComponent{
+class RepoDetails extends Component{
 
   constructor(props){
     super(props);
     this.state = {repo: {}, commits: []};
     this.getCommits = this.getCommits.bind(this);
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
   getCommits(){
     var actualRepo = window.location.pathname;
     var page = localStorage.getItem('page');
     console.log(page);
-    $.get({
+    $.ajax({
       url:"https://api.github.com/repos/globocom"+actualRepo+"/commits?per_page=20&page="+page,
       dataType: 'json',
       success:function(resposta){
@@ -35,7 +34,7 @@ class RepoDetails extends PureComponent{
   }
   componentDidMount(){
     var actualRepo = window.location.pathname;
-    $.ajax({
+    $.get({
       url:"https://api.github.com/repos/globocom"+actualRepo,
       dataType: 'json',
       success:function(resposta){
