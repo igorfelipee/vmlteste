@@ -1,0 +1,49 @@
+.sidebar{
+  width: 30%;
+  float: left;
+  background-color: #446CB3;
+  position: fixed;
+  height: 100vh;
+  overflow-y:scroll;
+  overflow-x: hidden;
+  font-family: 'Open Sans', sans-serif;
+}
+.brand{
+  font-weight: 700;
+  font-size: 3em;
+  text-align: center;
+  padding: 30px;
+  background-color: #22313F;
+  color: white;
+}
+.brand small{
+  font-size: .5em;
+  color: #ddd;
+}
+.sidebar a{
+  text-decoration: none;
+}
+.repository{
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  transition: all .5s;
+}
+.repository span{
+  padding-right: 20px;
+  padding-top: 10px;
+}
+.repository .fa-star{
+  color: #F4D03F;
+  padding-right: 5px;
+}
+.repository .fa-code-fork{
+  color: #333;
+  padding-right: 5px;
+}
+.repository:hover{
+  background-color: #eee;
+  color: #333;
+  border-right: 3px solid #333;
+  transition: all .5s;
+}
