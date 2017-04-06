@@ -32,7 +32,7 @@ class RepoDetails extends Component{
     var next = parseInt(page) + 1;
     localStorage.setItem('page', next);
   }
-  componentDidMount(){
+  getRepos(){
     var actualRepo = window.location.pathname;
     $.get({
       url:"https://api.github.com/repos/globocom"+actualRepo,
@@ -43,8 +43,19 @@ class RepoDetails extends Component{
       }.bind(this)
     })
     localStorage.setItem('page', 1);
+  }
+  componentDidMount(){
+    this.getRepos();
     this.getCommits();
   }
+  shouldComponentUpdate(nextProps, nextState){
+    return true;
+  }
+  componentWillReceiveProps(nextProps){
+  this.setState({ repo:[], commits:[] });
+  this.getRepos();
+  this.getCommits();
+}
   render(){
     return(
       <div className="repo-details">
@@ -58,7 +69,7 @@ class RepoDetails extends Component{
         {
             this.state.commits.map(function(commit){
               return(
-                <a href={commit.url} target="_blank" key={commit.sha}>
+                <a href={commit.html_url} target="_blank" key={commit.sha}>
                   <div className="commit">
                     <span>{commit.commit.message}</span>
                   </div>
